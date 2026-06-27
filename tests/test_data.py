@@ -129,7 +129,6 @@ class TestGenerateDataset(unittest.TestCase):
             self.assertAlmostEqual(target, expected, places=10)
 
     def test_noise_increases_variance(self):
-        import math
 
         _, y_low = generate_dataset(n_samples=500, noise=1.0, seed=0)
         _, y_high = generate_dataset(n_samples=500, noise=50.0, seed=0)

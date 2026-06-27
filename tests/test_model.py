@@ -241,7 +241,6 @@ class TestConvergence(unittest.TestCase):
 
     def test_single_feature_weight_recovery(self):
         """y = 4*x → after scaling weight should capture that slope."""
-        import math
 
         X = [[float(i)] for i in range(1, 51)]
         y = [4.0 * i for i in range(1, 51)]
@@ -339,6 +338,7 @@ class TestRefit(unittest.TestCase):
         m = LinearRegression(verbose=False)
         m.fit(X, y)
         first_n_iter = m.n_iter_
+        assert first_n_iter > 0
 
         # Fit again with different (also scaled) data
         xs2, ys2 = ZScoreScaler(), ZScoreScaler()
