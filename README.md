@@ -3,16 +3,17 @@
 > Linear Regression from scratch — **no ML libraries required**.  
 > Pure Python · Batch Gradient Descent · Z-score normalisation · Early stopping
 
+[![PyPI version](https://img.shields.io/pypi/v/bizhani-linreg.svg)](https://pypi.org/project/bizhani-linreg/)
+[![Python versions](https://img.shields.io/pypi/pyversions/bizhani-linreg.svg)](https://pypi.org/project/bizhani-linreg/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/MohsenBizhani/linreg/blob/main/LICENSE)
+[![CI](https://github.com/MohsenBizhani/linreg/actions/workflows/ci.yml/badge.svg)](https://github.com/MohsenBizhani/linreg/actions/workflows/ci.yml)
+
 ---
 
 ## Installation
 
 ```bash
-# Editable (development) install — changes to the source are reflected immediately
-pip install -e .
-
-# Or a regular install
-pip install .
+pip install bizhani-linreg
 ```
 
 `linreg` has a single runtime dependency: **matplotlib** (for plotting).  
@@ -45,7 +46,6 @@ X_test_s  = x_scaler.transform(X_test)        # transform only on test
 
 y_scaler  = ZScoreScaler()
 y_train_s = y_scaler.fit_transform_1d(y_train)
-y_test_s  = y_scaler.transform_1d(y_test)
 
 # 4. Train
 model = LinearRegression(lr=0.01, max_iter=10_000, tol=1e-6)
@@ -65,9 +65,11 @@ fig = plot_all(model.loss_history, model.n_iter_, y_test, y_pred)
 fig.savefig("results.png", dpi=150)
 ```
 
-Run the bundled demo:
+Clone the repo and run the bundled demo:
 
 ```bash
+git clone https://github.com/MohsenBizhani/linreg.git
+cd linreg
 python main.py
 ```
 
@@ -86,7 +88,7 @@ LinearRegression(lr=0.01, max_iter=10_000, tol=1e-6, verbose=True)
 | `fit(X, y)` | Train the model; returns `self` for chaining |
 | `predict(X)` | Return predicted values |
 | `score(X, y)` | Return R² on the given data |
-| `summary()` | Print fitted parameters and training stats |
+| `summary()` | Return a string of fitted parameters and training stats |
 
 **Key attributes after `fit()`**
 
@@ -94,7 +96,7 @@ LinearRegression(lr=0.01, max_iter=10_000, tol=1e-6, verbose=True)
 |---|---|
 | `weights` | Fitted weight vector `[w₁, …, wₙ]` |
 | `bias` | Fitted intercept `b` |
-| `loss_history` | MSE at every iteration |
+| `loss_history` | MSE recorded at every iteration |
 | `n_iter_` | Actual iterations run (early stopping may fire early) |
 
 ---
@@ -145,7 +147,7 @@ from linreg import plot_loss, plot_predictions, plot_residuals, plot_all
 ```
 
 All functions return a `matplotlib.Figure` — they **never** call `plt.show()`, so
-you control display, saving, or embedding.
+you control display, saving, or notebook embedding.
 
 | Function | Description |
 |---|---|
@@ -185,13 +187,40 @@ linreg/
 ├── _metrics.py     mse, rmse, mae, r2_score
 ├── _data.py        train_test_split, generate_dataset
 └── plot.py         plot_loss, plot_predictions, plot_residuals, plot_all
+tests/
+├── test_math.py
+├── test_scaler.py
+├── test_metrics.py
+├── test_data.py
+├── test_model.py
+└── test_integration.py
 main.py             runnable demo
-setup.py            packaging
+pyproject.toml      packaging
 README.md           this file
 ```
 
 ---
 
+## Development
+
+```bash
+git clone https://github.com/MohsenBizhani/linreg.git
+cd linreg
+pip install -e ".[dev]"
+pytest
+```
+
+---
+
+## Links
+
+- **PyPI:** https://pypi.org/project/bizhani-linreg/
+- **GitHub:** https://github.com/MohsenBizhani/linreg
+- **Issues:** https://github.com/MohsenBizhani/linreg/issues
+- **Changelog:** https://github.com/MohsenBizhani/linreg/blob/main/CHANGELOG.md
+
+---
+
 ## License
 
-MIT
+MIT © [Mohsen Bizhani](https://github.com/MohsenBizhani)
