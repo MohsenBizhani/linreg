@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "linreg"
+version = "1.0.0"
+description = "Linear Regression from scratch — no ML libraries required."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Mohsen Bizhani" }]
+requires-python = ">=3.8"
+dependencies = ["matplotlib"]
+keywords = [
+    "linear regression",
+    "machine learning",
+    "gradient descent",
+    "from scratch",
+    "education",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Education",
+]
+
+[project.urls]
+Homepage = "https://github.com/MohsenBizhani/linreg"
+Repository = "https://github.com/MohsenBizhani/linreg"
+"Bug Tracker" = "https://github.com/MohsenBizhani/linreg/issues"
+Changelog = "https://github.com/MohsenBizhani/linreg/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-cov"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["linreg*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+
+[tool.coverage.run]
+source = ["linreg"]
+omit = ["tests/*", "main.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
